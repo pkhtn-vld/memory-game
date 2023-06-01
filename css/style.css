@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url(../fonts/opensans-regular-webfont.woff2) format('woff2'), url(../fonts/opensans-regular-webfont.woff) format('woff');
+    font-display: swap;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url(../fonts/opensans-bold-webfont.woff2) format('woff2'), url(../fonts/opensans-bold-webfont.woff) format('woff');
+    font-display: swap;
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Open Sans', "Arial", sans-serif;
+}
+
+.title, .description {
+    width: fit-content;
+    margin: 0 auto 15px auto;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.memory-game {
+    width: 800px;
+    height: 800px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.memory-card {
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+    border-radius: 20px;
+    border: 2px solid #090909;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    cursor: pointer;
+}
+
+.front-face,
+.back-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 20px;
+    backface-visibility: hidden;
+
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face {
+    transform: rotateY(180deg);
+    padding: 30px;
+}
+
+.new-game {
+    display: none;
+    width: fit-content;
+    margin: 0 auto; 
+    padding: 5px 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    border: 2px solid #090909;
+    background-color: white;
+    color: black;
+    transition: .4s;
+}
+
+.new-game:hover {
+    background-color: black;
+    color: white;
+    transition: .4s;
+}
+
+.new-game:active {
+    transform: translateY(-5px);
+    transition: .2s;
+}
+
+.time-and-record {
+    position: absolute;
+    right: 10%;
+    top: 10%;
+}

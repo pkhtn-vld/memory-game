@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/svg" rel="shortcut icon" href="img/fav.svg">
+    <title>Игра в "пары"</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script defer src="js/timer.js"></script>
+    <script defer src="js/celebrate.js"></script>
+    <script defer src="js/script.js"></script>
+</head>
+
+<body>
+
+    <h1 class="title">Игра в "пары"</h1>
+    <p class="description">Открывайте карточки и старайтесь найти пары. Игра считается пройденой, когда будут
+        найдены все пары.</p>
+    <div class="time-and-record">
+        <p id="text"></p>
+        <p>Время: <span id="seconds">00</span>.<span id="tens">00</span></p>
+    </div>
+
+    <section class="memory-game">
+        <div class="memory-card" data-framework="one">
+            <img class="front-face" src="img/one.jpg" alt="one">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="one">
+            <img class="front-face" src="img/one.jpg" alt="one">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="two">
+            <img class="front-face" src="img/two.jpg" alt="two">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="two">
+            <img class="front-face" src="img/two.jpg" alt="two">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="three">
+            <img class="front-face" src="img/three.jpg" alt="three">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="three">
+            <img class="front-face" src="img/three.jpg" alt="three">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="four">
+            <img class="front-face" src="img/four.jpg" alt="four">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="four">
+            <img class="front-face" src="img/four.jpg" alt="four">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="five">
+            <img class="front-face" src="img/five.jpg" alt="five">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="five">
+            <img class="front-face" src="img/five.jpg" alt="five">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="six">
+            <img class="front-face" src="img/six.jpg" alt="six">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="six">
+            <img class="front-face" src="img/six.jpg" alt="six">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="seven">
+            <img class="front-face" src="img/seven.jpg" alt="seven">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="seven">
+            <img class="front-face" src="img/seven.jpg" alt="seven">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="eight">
+            <img class="front-face" src="img/eight.jpg" alt="eight">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+
+        <div class="memory-card" data-framework="eight">
+            <img class="front-face" src="img/eight.jpg" alt="eight">
+            <img class="back-face" src="img/card.jpg" alt="Memory Card">
+        </div>
+    </section>
+
+    <a class="new-game" href="index.html">Сыграть ещё раз</a>
+</body>
+
+</html>
