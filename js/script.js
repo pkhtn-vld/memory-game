@@ -1,38 +1,86 @@
-let cards = document.querySelectorAll(".memory-card");
+class Card {
+  constructor(element, cardNumber) {
+    this.element = element;
+    this.cardNumber = cardNumber;
+    this.open = false;
+    this.success = false;
+  }
 
+  set cardNumber(value) {
+    this._cardNumber = value;
+  }
+
+  get cardNumber() {
+    return this._cardNumber;
+  }
+
+  set open(value) {
+    if (value) {
+      this.element.classList.add("flip");
+      this._open = true;
+    } else {
+      this.element.classList.remove("flip");
+      this._open = false;
+    }
+  }
+
+  get open() {
+    return this._open;
+  }
+
+  set success(value) {
+    if (value) {
+      this.element.removeEventListener("click", flipCard);
+      this._success = true;
+    } else {
+      this.element.addEventListener("click", flipCard);
+      this._success = false;
+    }
+  }
+
+  get success() {
+    return this._success;
+  }
+}
+
+const cards = document.querySelectorAll(".memory-card");
+let cardsArray = [];
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 
-function flipCard() {
+function flipCard(card) {
   if (lockBoard) return;
-  if (this === firstCard) return;
 
-  this.classList.add("flip");
+  card = cardsArray.find((card) => card.element === this);
+
+  if (card === firstCard) return;
+
+  card.open = true;
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
-    firstCard = this;
+    firstCard = card;
+    clearInterval(interval);
+    interval = setInterval(startTimer, 10);
     return;
   }
 
-  secondCard = this;
+  secondCard = card;
 
   checkForMatch();
-
-  clearInterval(Interval);
-  Interval = setInterval(startTimer, 10);
   addNewGame();
 }
 
 function checkForMatch() {
-  let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+  let isMatch = firstCard.cardNumber === secondCard.cardNumber;
+
   isMatch ? disableCards() : unflipCards();
 }
 
 function disableCards() {
-  firstCard.removeEventListener("click", flipCard);
-  secondCard.removeEventListener("click", flipCard);
+  firstCard.success = true;
+  secondCard.success = true;
 
   resetBoard();
 }
@@ -41,8 +89,8 @@ function unflipCards() {
   lockBoard = true;
 
   setTimeout(() => {
-    firstCard.classList.remove("flip");
-    secondCard.classList.remove("flip");
+    firstCard.open = false;
+    secondCard.open = false;
 
     resetBoard();
   }, 700);
@@ -60,39 +108,38 @@ function shuffleMain(array) {
   }
 }
 
-let arrCards = Object.keys(cards);
-shuffleMain(arrCards);
-console.log(arrCards);
-
-cards.forEach((card, index) => {
-  card.style.order = arrCards[index];
-});
-
-// (function shuffle() {
-//   cards.forEach((card) => {
-//     let ramdomPos = Math.floor(Math.random() * 12);
-//     card.style.order = ramdomPos;
-//   });
-// })();
-
 function addNewGame() {
-  let counter = 0;
-  cards.forEach((card) => {
-    if (card.classList.contains("flip")) {
-      counter += 1;
-    }
-    if (counter === 16) {
-      document.querySelector(".new-game").style.display = "block";
-      celebrate();
-      setTimeout(celebrate, 1000);
-      setTimeout(celebrate, 2000);
-      setTimeout(celebrate, 3000);
-      setTimeout(celebrate, 4000);
+  
+  if (cardsArray.every(card => card.open)) {
+    document.querySelector(".new-game").style.display = "block";
+    celebrate();
+    setTimeout(celebrate, 1000);
+    setTimeout(celebrate, 2000);
+    setTimeout(celebrate, 3000);
+    setTimeout(celebrate, 4000);
 
-      text.innerHTML = "Счет: " + (5000 - seconds * 50);
-      clearInterval(Interval);
-    }
+    text.innerHTML = "Счет: " + (5000 - seconds * 50);
+    clearInterval(interval);
+  }
+}
+
+function createCardsArray() {
+  for (const cardElement of cards) {
+    let cardNumber = cardElement.dataset.framework;
+    let card = new Card(cardElement, cardNumber);
+    cardsArray.push(card);
+  }
+
+  return cardsArray;
+}
+
+function initializeCards(cardsArray) {
+  cardsArray.forEach((card, index) => {
+    card.element.style.order = index;
+    card.element.addEventListener("click", flipCard(card));
   });
 }
 
-cards.forEach((card) => card.addEventListener("click", flipCard));
+createCardsArray();
+shuffleMain(cardsArray);
+initializeCards(cardsArray);
