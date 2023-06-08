@@ -1,5 +1,3 @@
-// based on https://www.kirilv.com/canvas-confetti/
-
 const DEFAULTS = {
   origin: { x: 0.3 + Math.random() * 0.4, y: 0.7 },
   angle: Math.random() * 20 + 80,
