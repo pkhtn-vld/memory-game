@@ -64,6 +64,4 @@ function playSound() {
   audio.play();
 }
 
-// window.celebrate = celebrate;
-
 export { celebrate }
