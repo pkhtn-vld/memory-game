@@ -84,3 +84,5 @@ class AmazingCard extends Card {
     this.element.appendChild(imgElement);
   }
 }
+
+export { Card, AmazingCard }

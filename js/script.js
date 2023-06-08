@@ -1,7 +1,14 @@
+import { AmazingCard } from './Card.js';
+import { startTimer, interval, seconds } from './timer.js'
+import { celebrate } from './celebrate.js';
+
+const launchClock = startTimer;
+const clockSeconds = seconds;
+const startCelebrate = celebrate;
 const memoryGameContainer = document.querySelector("#memory-game-container");
-const cards = document.querySelectorAll(".memory-card");
 const CARD_IMAGES = [ "angular", "css", "html", "js", "nodejs", "php", "react", "vue", ];
 
+let clockInterval = interval;
 let cardsArray = [];
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -19,8 +26,8 @@ function flipCard(cardElement) {
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = card;
-    clearInterval(interval);
-    interval = setInterval(startTimer, 10);
+    clearInterval(clockInterval);
+    clockInterval = setInterval(launchClock, 10);
     return;
   }
 
@@ -70,13 +77,13 @@ function addNewGame() {
   if (cardsArray.every((card) => card.open)) {
     document.querySelector(".new-game").style.display = "block";
     celebrate();
-    setTimeout(celebrate, 1000);
-    setTimeout(celebrate, 2000);
-    setTimeout(celebrate, 3000);
-    setTimeout(celebrate, 4000);
+    setTimeout(startCelebrate, 1000);
+    setTimeout(startCelebrate, 2000);
+    setTimeout(startCelebrate, 3000);
+    setTimeout(startCelebrate, 4000);
 
-    text.innerHTML = "Счет: " + (5000 - seconds * 50);
-    clearInterval(interval);
+    text.innerHTML = "Счет: " + (5000 - clockSeconds * 50);
+    clearInterval(clockInterval);
   }
 }
 

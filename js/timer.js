@@ -20,3 +20,5 @@ function startTimer() {
         appendTens.innerHTML = "00";
     }
 }
+
+export { startTimer, interval, seconds }
